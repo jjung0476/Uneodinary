@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#f6f8f6"
+        tools:context=".GatheringFundActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[메뉴] Annual Camping Trip [설정]"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#102216"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Current Fund Balance"
+            android:textSize="16sp"
+            android:textColor="#475569"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="8dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$1,250.75"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#102216"
+            android:paddingBottom="24dp"
+            android:paddingHorizontal="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:paddingBottom="24dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Income"
+                    android:textSize="14sp"
+                    android:textColor="#475569"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$2,000.00"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#16a34a"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Expenses"
+                    android:textSize="14sp"
+                    android:textColor="#475569"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$749.25"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#dc2626"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:paddingBottom="24dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="[Add Expense]"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="#D0F6D5"
+                android:layout_marginEnd="8dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="[Add Income]"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="#D0F6D5"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent Transactions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#102216"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[장바구니] Groceries for BBQ (Oct 26) / -$85.50"
+                android:padding="8dp"
+                android:background="#e2e8f0"
+                android:layout_marginBottom="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[지불] Member Fee: Jane D. (Oct 25) / +$50.00"
+                android:padding="8dp"
+                android:background="#e2e8f0"
+                android:layout_marginBottom="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[주유소] Gas for Trip (Oct 24) / -$64.20"
+                android:padding="8dp"
+                android:background="#e2e8f0"
+                android:layout_marginBottom="4dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[티켓] Campsite Booking Fee (Oct 22) / -$150.00"
+                android:padding="8dp"
+                android:background="#e2e8f0"
+                android:layout_marginBottom="4dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="[Dashboard] [Members] [Reports] [Profile]"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="#ffffff"
+            android:textColor="#13ec5b"/>
+
+    </LinearLayout>
+
+</LinearLayout>

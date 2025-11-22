@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light_color"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="태그 생성"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/gray_800_color"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/semi_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="동아리, 학생회 등\n단체 모임에 꼭 필요한\n회계 관리를 한눈에"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp"
+        android:textColor="@color/gray_600_color"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_title" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/semi_title"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/label_tag_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="어떤 모임에서 사용할 태그인가요?"
+                android:textSize="14sp"
+                android:textColor="@color/gray_700_color"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/button_add_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="추가"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="16dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bg_edit_text_rounded"
+                android:backgroundTint="@color/primary_color"
+                app:cornerRadius="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/label_tag_question"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"/>
+
+            <EditText
+                android:id="@+id/tag_input"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:hint="모임명을 입력해주세요. 예) 풋살, 12월 모임"
+                android:textSize="16sp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/bg_edit_text_rounded"
+                android:textColor="@color/gray_900_color"
+                android:textColorHint="@color/gray_400_color"
+                android:layout_marginEnd="8dp"
+                android:inputType="text"
+                app:layout_constraintTop_toTopOf="@+id/button_add_tag"
+                app:layout_constraintBottom_toBottomOf="@+id/button_add_tag"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_add_tag" />
+
+            <TextView
+                android:id="@+id/label_tag_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="추가된 태그 목록 (RecyclerView Placeholder)"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/gray_700_color"
+                app:layout_constraintTop_toBottomOf="@+id/button_add_tag"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tag_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginTop="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/label_tag_list"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/item_tag_view"
+                tools:itemCount="2"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="다음"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingVertical="16dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_edit_text_rounded"
+        android:backgroundTint="@color/primary_color"
+        app:cornerRadius="8dp"
+        android:minHeight="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
