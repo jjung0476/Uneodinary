@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#155DFC</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="windowBackground">#00000000</color>
+
+    <color name="taskEnable">#bbcffc</color>
+
+    <color name="dialogBackground">#FFFFFF</color>
+
+    <color name="buttonBackground">#FFFFFF</color>
+    <color name="buttonPressedBackground">#0D000000</color>
+
+    <color name="background_disable">#0D000000</color>
+    <color name="background_enable">#0D000000</color>
+
+    <color name="text_color">#374151</color> <!-- Black -->
+    <color name="hint_color">#808080</color>
+
+    <color name="indicator_inactive_bg_color">#dbdbdb</color>
+
+    <color name="colorBlack">#242424</color>
+    <color name="colorBasic">#37424d</color>
+    <color name="colorDarkGray">#636363</color>
+    <color name="colorNavy">#414c65</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#a1a1a1</color>
+    <color name="colorBorder">#E5E7EB</color>
+    <color name="colorLightGray">#f8f8f8</color>
+    <color name="colorSecondary">#495e71</color>
+    <color name="colorRed">#FFE60000</color>
+    <color name="colorOrange">#FFFF8000</color>
+    <color name="colorGreen">#FF00B050</color>
+    <color name="colorBlue">#FF0070C0</color>
+    <color name="colorTransparent">#00000000</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -15,4 +50,5 @@
     <color name="gray_700_color">#374151</color>
     <color name="gray_400_color">#9CA3AF</color>
     <color name="gray_100_color">#F3F4F6</color>
+
 </resources>
