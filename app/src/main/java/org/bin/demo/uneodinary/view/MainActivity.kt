@@ -23,6 +23,9 @@ import org.bin.demo.uneodinary.view.compose.ComposeTagSettleProcessFragment
 import org.bin.demo.uneodinary.view.compose.ComposeTagSettleSelectFragment
 import org.bin.demo.uneodinary.view.event.NavigationEvent
 import org.bin.demo.uneodinary.view.fragment.CameraFragment
+import org.bin.demo.uneodinary.view.fragment.TagFragment
+import org.bin.demo.uneodinary.view.fragment.TagMainFragment
+import org.bin.demo.uneodinary.view.fragment.TagPlusFragment
 import org.koiware.ocr.demo.app.koi_camera.viewmodel.SharedViewModel
 
 
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_demo)
 
         if (savedInstanceState == null) {
-            navigateToComposePayMainFragment()
+            navigateToTagMainFragment()
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -89,6 +92,28 @@ class MainActivity : AppCompatActivity() {
                 shareContent(event.text)
             }
         }
+    }
+
+    fun navigateToTagPlusFragment() {
+        debug("navigateToTagPlusFragment !")
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, TagPlusFragment.newInstance())
+            .addToBackStack(null)
+            .commitAllowingStateLoss()
+    }
+
+    fun navigateToTagMainFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, TagMainFragment.newInstance())
+            .addToBackStack(null)
+            .commitAllowingStateLoss()
+    }
+
+    fun navigateToTagFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, TagFragment.newInstance())
+            .addToBackStack(null)
+            .commitAllowingStateLoss()
     }
 
     fun navigateToComposePayMainFragment() {

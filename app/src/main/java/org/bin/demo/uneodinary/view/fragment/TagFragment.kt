@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.bin.demo.uneodinary.R
 import org.bin.demo.uneodinary.databinding.FragmentTagBinding
+import org.bin.demo.uneodinary.view.MainActivity
 
 class TagFragment : Fragment() {
     lateinit var binding: FragmentTagBinding
@@ -26,10 +27,12 @@ class TagFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.submitButton.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragmentContainer, TagMainFragment())
-                .addToBackStack(null)
-                .commitAllowingStateLoss()
+            (activity as? MainActivity)?.navigateToTagMainFragment()
         }
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = TagMainFragment()
     }
 }

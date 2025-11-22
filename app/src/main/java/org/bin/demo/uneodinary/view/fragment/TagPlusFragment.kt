@@ -47,4 +47,9 @@ class TagPlusFragment : Fragment() {
             binding.editTextTagInput.setText("")
         }
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = TagPlusFragment()
+    }
 }

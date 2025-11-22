@@ -8,6 +8,7 @@ import androidx.compose.ui.platform.ComposeView // ComposeView 임포트
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import org.bin.demo.uneodinary.view.MainActivity
 import org.bin.demo.uneodinary.view.compose.screen.TagSelectScreen
 import org.koiware.ocr.demo.app.koi_camera.viewmodel.SharedViewModel
 
@@ -25,7 +26,7 @@ class ComposeTagSelectFragment : Fragment() {
                 TagSelectScreen(sharedViewModel, onBackClick = {
                     requireActivity().onBackPressed()
                 }, onDoneClick = {
-                    requireActivity().onBackPressed()
+                    (activity as? MainActivity)?.navigateToTagDetailFragment()
                 })
             }
         }

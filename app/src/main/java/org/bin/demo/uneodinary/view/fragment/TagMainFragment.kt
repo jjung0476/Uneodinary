@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.fragment.app.Fragment
+import org.bin.demo.debug
 import org.bin.demo.uneodinary.R
 import org.bin.demo.uneodinary.databinding.FragmentTagMainBinding
+import org.bin.demo.uneodinary.view.MainActivity
 
 class TagMainFragment : Fragment() {
     lateinit var binding: FragmentTagMainBinding
@@ -29,10 +31,13 @@ class TagMainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.tagPlusSet.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragmentContainer, TagPlusFragment())
-                .addToBackStack(null)
-                .commitAllowingStateLoss()
+            debug("navigateToTagPlusFragment !")
+            (activity as? MainActivity)?.navigateToTagPlusFragment()
+        }
+
+        binding.submitButton.setOnClickListener {
+            debug("navigateToTagPlusFragment !")
+            (activity as? MainActivity)?.navigateToComposePayMainFragment()
         }
 
         val tagRVAdapter = TagMainRVAdapter(tagData)
@@ -46,5 +51,10 @@ class TagMainFragment : Fragment() {
                 tagRVAdapter.removeItem(position)
             }
         })
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = TagMainFragment()
     }
 }

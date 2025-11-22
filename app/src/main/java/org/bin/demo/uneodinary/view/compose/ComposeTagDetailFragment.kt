@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import org.bin.demo.repository.model.ExpenseItem
 import org.bin.demo.repository.model.TagSummary
+import org.bin.demo.uneodinary.view.MainActivity
 import org.bin.demo.uneodinary.view.compose.screen.TagDetailScreen
 import org.bin.demo.uneodinary.view.compose.screen.TagSelectScreen
 import org.koiware.ocr.demo.app.koi_camera.viewmodel.SharedViewModel
@@ -40,7 +41,9 @@ class ComposeTagDetailFragment : Fragment() {
                     summary = summaryData,
                     expenses = expenseList,
                     onBackClick = {},
-                    onSettleClick = {},
+                    onSettleClick = {
+                        (activity as? MainActivity)?.navigateToSettleProcessFragment()
+                    },
                     onReportClick = {}
                 )
             }
