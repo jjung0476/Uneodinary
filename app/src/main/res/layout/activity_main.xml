@@ -9,7 +9,7 @@
         android:id="@+id/header_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/Time"
+        android:src="@drawable/time"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"

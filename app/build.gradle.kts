@@ -1,22 +1,52 @@
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.generic.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-    id("kotlin-kapt")
+    alias(libs.plugins.generic.application.compose)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.generic.hilt)
 }
 
 android {
-    namespace = "com.example.uneodinary"
-    compileSdk = 36
+    namespace = "org.bin.demo.uneodinary"
+    compileSdk = 35
+
+    applicationVariants.all {
+        outputs.forEach { output ->
+            val apkOutput = output as BaseVariantOutputImpl
+            apkOutput.outputFileName = "app_prod_ver_${versionCode}_${buildType.name}.apk"
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("/Users/bin/Documents/key/key.jks")
+            storePassword = "584545"
+            keyAlias = "key"
+            keyPassword = "584545"
+        }
+    }
+
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
+    aaptOptions {
+        noCompress("bin", "task")
+    }
 
     defaultConfig {
-        applicationId = "com.example.uneodinary"
-        minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = "org.demo.uneodinary"
+        minSdk = 26
+        targetSdk = 35
+        versionCode = 300
+        versionName = "3.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner   = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -26,88 +56,71 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
     buildFeatures {
-        compose = true
+        //noinspection DataBindingWithoutKapt
+        dataBinding = true
         viewBinding = true
+        buildConfig = true
+        compose = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "21"
     }
 }
 
 dependencies {
+    // ML Kit Text Recognition (기본 모델)
+    implementation("com.google.mlkit:text-recognition-korean:16.0.1")
+    implementation("com.google.mlkit:translate:17.0.3")
+    // ML Kit Translation
+//    implementation("com.google.mlkit:translation:17.0.0") // 최신 버전 확인
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    implementation(project(":domain:usecase"))
+    implementation(project(":common:utils"))
+    implementation(project(":di"))
+    implementation(project(":core:camerax"))
+    implementation(project(":data:repository"))
+    implementation("com.google.mediapipe:tasks-genai:0.10.27")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation(libs.runtime.livedata)
+    implementation(libs.translate)
+    implementation(libs.androidx.foundation.layout)
+    implementation(libs.androidx.compose.ui.text)
+
+
+    val work_version = "2.10.0"
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+
+    implementation(libs.material)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
+
+    implementation(libs.androidx.appcompat)
+    implementation(libs.com.google.code.gson)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.foundation.android)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation("androidx.core:core-splashscreen:1.0.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    val nav_version = "2.9.4"
-
-    //GSON
-    implementation("com.google.code.gson:gson:2.13.2")
-
-    // Indicator
-    implementation("me.relex:circleindicator:2.1.6")
-
-    //  RoomDB
-    val roomVersion = "2.6.1"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-
-
-    //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
-
-    //okHttp
-    implementation("com.squareup.okhttp3:okhttp:4.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-
-    //Glide
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
-
-    // Jetpack Compose integration
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-
-    // Views/Fragments integration
-    implementation("androidx.navigation:navigation-fragment:$nav_version")
-    implementation("androidx.navigation:navigation-ui:$nav_version")
-
-    // Feature module support for Fragments
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
-
-    // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
-
-    // JSON serialization library, works with the Kotlin serialization plugin
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-
-    // To use constraintlayout in compose
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
+    // Hilt Navigation Compose
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 }

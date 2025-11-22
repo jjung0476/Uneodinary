@@ -1,4 +1,6 @@
 pluginManagement {
+    includeBuild("build-logic")
+
     repositories {
         google {
             content {
@@ -16,9 +18,17 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
 }
 
+gradle.startParameter.excludedTaskNames.addAll(listOf(":build-logic:convention:testClasses"))
+
 rootProject.name = "Uneodinary"
 include(":app")
- 
+include(":di")
+include(":domain:usecase")
+include(":common:utils")
+include(":data:repository")
+include(":data:datasource:remote")
+include(":core:camerax")
