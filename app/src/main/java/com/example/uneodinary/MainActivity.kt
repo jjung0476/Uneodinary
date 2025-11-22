@@ -6,37 +6,22 @@ import com.example.uneodinary.databinding.ActivityMainBinding
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.*
 import android.app.Activity
+import androidx.fragment.app.*
 import com.example.uneodinary.ui.theme.UneodinaryTheme
 
-class MainActivity : AppCompatActivity() { // ComponentActivity()
+class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            UneodinaryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.main_fragmentContainer, TagFragment())
+                    .addToBackStack(null)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    UneodinaryTheme {
-        Greeting("Android")
     }
 }

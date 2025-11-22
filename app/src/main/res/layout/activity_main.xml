@@ -24,100 +24,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/middle_tag"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/bg_edit_text_rounded"
-        android:backgroundTint="#E1F4FF"
-        android:gravity="center"
-        android:text="# 태그 생성하기"
-        android:textColor="#0094E9"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_image" />
-
-    <TextView
-        android:id="@+id/middle_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="공급 관리에서 발생할\n만남들에 이름을 붙여주세요"
-        android:textColor="@color/gray_900_color"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/middle_tag"
-        app:layout_constraintStart_toStartOf="@id/middle_tag"/>
-
-    <TextView
-        android:id="@+id/middle_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="만남의 이름을 바탕으로\n지출을 알아서 분리해줘요"
-        android:textSize="16sp"
-        android:lineSpacingExtra="4dp"
-        android:textColor="@color/gray_600_color"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/middle_title"
-        app:layout_constraintStart_toStartOf="@id/middle_tag"/>
-
-    <LinearLayout
-        android:id="@+id/tag_plus"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:background="@drawable/bg_edit_text_rounded"
-        android:backgroundTint="#F5F7FA"
-        android:layout_marginTop="30dp"
-        android:paddingVertical="20dp"
-        app:layout_constraintTop_toBottomOf="@id/middle_text"
-        app:layout_constraintStart_toStartOf="@id/middle_tag">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_with_border"
-            android:padding="12dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_plus" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="태그 추가하기"
-                    android:textColor="@color/gray_600_color"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:text="다음"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingVertical="16dp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/bg_edit_text_rounded"
-        android:backgroundTint="#C9CDD4"
-        android:layout_marginBottom="30dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/main_fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/header_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
