@@ -1,29 +1,30 @@
-package org.bin.demo.uneodinary.view.fragment
+package org.bin.demo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.bin.demo.repository.model.TagSummary
 import org.bin.demo.uneodinary.databinding.ItemTagViewBinding
 
-class TagMainRVAdapter(private val tagList: ArrayList<String>) : RecyclerView.Adapter<TagMainRVAdapter.ViewHolder>() {
+class TagMainRVAdapter() : RecyclerView.Adapter<TagMainRVAdapter.ViewHolder>() {
+
+    private var tagList: List<TagSummary> = emptyList()
+
     interface MyItemClickListener {
-        fun onRemoveTag(position: Int)
+        fun onRemoveTag(tag: TagSummary)
     }
 
     private lateinit var mItemClickListener: MyItemClickListener
+
     fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
         mItemClickListener = itemClickListener
     }
 
-    fun addItem(tag: String) {
-        tagList.add(tag)
-        notifyItemInserted(tagList.size - 1)
+    fun updateTagList(newList: List<TagSummary>) {
+        tagList = newList
+        notifyDataSetChanged()
     }
 
-    fun removeItem(position: Int) {
-        tagList.removeAt(position)
-        notifyItemRemoved(position)
-    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemTagViewBinding = ItemTagViewBinding.inflate(
@@ -35,16 +36,10 @@ class TagMainRVAdapter(private val tagList: ArrayList<String>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tagItem = tagList[position]
 
-        // 데이터 바인딩
         holder.bind(tagItem)
 
-        // 아이템 전체 클릭 리스너 (선택적)
-        holder.itemView.setOnClickListener {
-//            mItemClickListener.onItemClick(tagItem)
-        }
-
         holder.binding.tagClose.setOnClickListener {
-            mItemClickListener.onRemoveTag(position)
+            mItemClickListener.onRemoveTag(tagItem)
         }
     }
 
@@ -53,8 +48,9 @@ class TagMainRVAdapter(private val tagList: ArrayList<String>) : RecyclerView.Ad
     inner class ViewHolder(val binding: ItemTagViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tag: String) {
-            binding.tagText.text = tag
+        fun bind(tag: TagSummary) {
+            // tagClose 버튼은 binding에 포함되어 있다고 가정합니다.
+            binding.tagText.text = tag.tagName
         }
     }
 }

@@ -28,6 +28,12 @@ class UApplication : Application() {
         fun getUAppContext() : Context {
             return instance.applicationContext
         }
+
+        fun extractNumber(inputString: String): Long {
+            val numericString = inputString.replace(Regex("[^0-9]"), "")
+            return numericString.toLongOrNull() ?: 0L
+        }
+
     }
 
 }

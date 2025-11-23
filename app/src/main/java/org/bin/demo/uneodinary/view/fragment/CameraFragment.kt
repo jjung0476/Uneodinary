@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -21,12 +20,12 @@ import kotlinx.coroutines.sync.withLock
 import org.bin.demo.uneodinary.R
 import org.bin.demo.uneodinary.databinding.FragmentCameraBinding
 import org.bin.demo.uneodinary.view.viewmodel.OcrTranslateViewModel
-import org.koiware.ocr.demo.app.koi_camera.viewmodel.SharedViewModel
+import org.bin.demo.uneodinary.view.viewmodel.SharedViewModel
 
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
-    private val viewModel: OcrTranslateViewModel by viewModels()
+    private val ocrTranslateViewModel: OcrTranslateViewModel by activityViewModels()
 
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
@@ -72,7 +71,7 @@ class CameraFragment : Fragment() {
             cameraRepository?.captureImage({ bitmap, image ->
                 viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Default) {
                     bitmap?.let {
-                        viewModel.processImageAndTranslate(it)
+                        ocrTranslateViewModel.processImageAndTranslate(it)
                         sharedViewModel.onImageCaptured(it)
                     }
                 }

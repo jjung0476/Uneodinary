@@ -8,34 +8,31 @@ import androidx.compose.ui.platform.ComposeView // ComposeView 임포트
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
-import org.bin.demo.uneodinary.view.compose.screen.SettlementShareScreen
+import org.bin.demo.debug
+import org.bin.demo.uneodinary.view.compose.screen.CombinedSettlementAndReportScreen
 import org.bin.demo.uneodinary.view.viewmodel.SharedViewModel
 
 @AndroidEntryPoint
-class ComposeTagSettleSelectFragment : Fragment() {
+class ComposeReportFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
+            debug("sharedViewModel.selectedDetailReport : ${sharedViewModel.selectedDetailReport.value}")
             setContent {
-                SettlementShareScreen(
-                    detailResult = sharedViewModel.selectedTagDetailResultDto,
-                    onCloseClick = {
-
-                    },
-                    onShareClick = {
-                        sharedViewModel.selectedTagDetailResultDto.value?.let { sharedViewModel.createShareContent(it) }
-                    }
-                )
+                CombinedSettlementAndReportScreen(
+                    detailResult = sharedViewModel.selectedDetailReport,
+                    onBackClick = {
+                        requireActivity().onBackPressed()
+                    })
             }
         }
     }
 
     companion object {
-        fun newInstance() = ComposeTagSettleSelectFragment()
+        fun newInstance() = ComposeReportFragment()
     }
 }

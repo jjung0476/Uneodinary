@@ -15,6 +15,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,19 +26,23 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.koiware.ocr.demo.app.koi_camera.viewmodel.SharedViewModel
+import org.bin.demo.repository.model.TagSummary
+import org.bin.demo.repository.model.TotalItems
+import org.bin.demo.uneodinary.view.viewmodel.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TagSelectScreen(
-    viewModel: SharedViewModel,
+    sharedViewModel: SharedViewModel,
     onBackClick: () -> Unit,
-    onDoneClick: () -> Unit
+    onDoneClick: (TotalItems) -> Unit,
+    addTag: () -> Unit
 ) {
-    val capturedBitmap by viewModel.capturedBitmap.collectAsState()
-    var selectedTag by remember { mutableStateOf<String?>(null) }
-    val tagList = remember { mutableStateListOf("식비", "교통비") }
+    val capturedBitmap by sharedViewModel.capturedBitmap.collectAsState()
+    var selectedTag by remember { mutableStateOf<TotalItems?>(null) }
     val isDoneButtonEnabled = selectedTag != null
+    val totalItems by sharedViewModel.totalList.observeAsState(initial = emptyList())
+
 
     Scaffold(
         containerColor = Color.White,
@@ -56,24 +62,11 @@ fun TagSelectScreen(
             CommonBottomButton(
                 text = "완료",
                 isEnabled = isDoneButtonEnabled,
-                onClick = { onDoneClick },
+                onClick = {
+                    onDoneClick(selectedTag!!)
+                },
             )
 
-            Button(
-                onClick = onDoneClick,
-                enabled = isDoneButtonEnabled,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .height(56.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isDoneButtonEnabled) Color(0xFF42A5F5) else Color(0xFFD1D5DB),
-                    contentColor = Color.White
-                )
-            ) {
-                Text(text = "완료", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-            }
         }
     ) { paddingValues ->
         Column(
@@ -123,12 +116,13 @@ fun TagSelectScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(tagList) { tag ->
+                items(totalItems) { item ->
+
                     TagSelectionButton(
-                        tagName = tag,
-                        isSelected = tag == selectedTag,
+                        tagName = item.tag.tagName,
+                        isSelected = item == selectedTag,
                         onClick = {
-                            selectedTag = if (tag == selectedTag) null else tag
+                            selectedTag = if (item == selectedTag) null else item
                         }
                     )
                 }
@@ -136,7 +130,9 @@ fun TagSelectScreen(
                 // 태그 추가하기 버튼
                 item {
                     OutlinedButton(
-                        onClick = {  },
+                        onClick = {
+                            addTag()
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(52.dp),
@@ -144,7 +140,11 @@ fun TagSelectScreen(
                         border = BorderStroke(1.dp, Color(0xFFEEEEEE)),
                         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Gray)
                     ) {
-                        Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Icon(
+                            Icons.Default.Add,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("태그 추가하기", fontSize = 16.sp)
                     }

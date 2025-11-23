@@ -7,10 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import dagger.hilt.android.AndroidEntryPoint
+import org.bin.demo.repository.model.TagSummary
 import org.bin.demo.uneodinary.databinding.FragmentTagPlusBinding
+import org.bin.demo.uneodinary.view.viewmodel.ApiServiceViewModel
+import org.bin.demo.uneodinary.view.viewmodel.SharedViewModel
+import kotlin.getValue
 
+@AndroidEntryPoint
 class TagPlusFragment : Fragment() {
     lateinit var binding: FragmentTagPlusBinding
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val apiServiceViewModel: ApiServiceViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +36,9 @@ class TagPlusFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.submitButton.setOnClickListener {
+            val tagSummary = TagSummary(binding.editTextTagInput.text.toString())
+            sharedViewModel.addTag(tagSummary)
+            apiServiceViewModel.requestAddTag(tagSummary)
             requireActivity().supportFragmentManager.popBackStack()
         }
 

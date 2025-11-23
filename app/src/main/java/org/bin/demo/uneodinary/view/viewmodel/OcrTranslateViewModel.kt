@@ -20,8 +20,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import org.bin.demo.uneodinary.UApplication.Companion.LOG_TAG
 import org.bin.demo.uneodinary.UApplication.Companion.getUAppContext
+import javax.inject.Inject
 
-class OcrTranslateViewModel : ViewModel() {
+
+class OcrTranslateViewModel @Inject constructor() : ViewModel() {
 
     private val _ocrText = MutableStateFlow("추출된 텍스트:")
     val ocrText: StateFlow<String> = _ocrText.asStateFlow()
@@ -56,39 +58,7 @@ class OcrTranslateViewModel : ViewModel() {
 
                 // 1. OCR 텍스트 인식
                 val recognizedText = recognizeText(image)
-                Log.d(LOG_TAG, "koreanText: $recognizedText !")
-                val prompt = buildString {
-                    append("다음 항목을 카테고리로 분류해줘, 카테고리 목록: 식비, 카페, 교통, 통신비, 쇼핑, 편의점, 기타")
-                    append(recognizedText)
-                }
-
-                var conditions = DownloadConditions.Builder()
-                    .requireWifi()
-                    .build()
-                englishGermanTranslator.downloadModelIfNeeded(conditions)
-                    .addOnSuccessListener {
-                        englishGermanTranslator.translate(recognizedText)
-                            .addOnSuccessListener { translatedText ->
-                                Log.d(LOG_TAG, "translatedText: $translatedText !")
-
-                            }
-                            .addOnFailureListener { exception ->
-                                // Error.
-                                // ...
-                            }
-                    }
-                    .addOnFailureListener { exception ->
-                        // Model couldn’t be downloaded or other internal error.
-                        // ...
-                    }
-
-
                 _ocrText.value = "추출된 텍스트:\n$recognizedText"
-//                if (koreanText.isNotEmpty()) {
-//                    // 2. 번역 (모델이 다운로드되어 있어야 함)
-//                    val englishText = translator.translate(koreanText).await()
-//                    _translatedText.value = "번역된 텍스트 (영어):\n$englishText"
-//                }
 
             } catch (e: Exception) {
                 e.printStackTrace()

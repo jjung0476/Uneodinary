@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="86:54" />
+            app:layout_constraintDimensionRatio="3:4" />
 
         <ImageButton
             android:id="@+id/btnCapture"

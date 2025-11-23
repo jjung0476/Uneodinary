@@ -10,8 +10,8 @@ android {
 
 dependencies {
     implementation(project(":common:utils"))
-    implementation(project(":data:datasource:remote"))
-
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    api ("com.squareup.retrofit2:retrofit:2.9.0")
+    api ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }
