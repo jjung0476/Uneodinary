@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fragment_look_chip_off_background"
+    android:layout_marginStart="7dp">
+
+    <ImageView
+        android:id="@+id/ig_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_shop"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/look_chip_title_01_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="태그명1"
+        android:textColor="@color/black"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintStart_toStartOf="@id/ig_shop"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
